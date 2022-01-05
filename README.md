@@ -1,3 +1,3 @@
-# test_cpp2
+# test_lambda2
 
-String manipulation and formatting
+Lambdas and closures
