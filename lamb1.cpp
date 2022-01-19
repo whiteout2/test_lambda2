@@ -7,8 +7,7 @@
 using namespace std;
 
 
-class CountFrom
-{
+class CountFrom {
 public:
     CountFrom(int count) : count_(count) {}
 
@@ -22,7 +21,8 @@ private:
 // Closure
 // See: https://en.wikipedia.org/wiki/Closure_(computer_programming)
 // NOTE: capture turns lambda into closure
-string foo(string myname) {
+string foo(string myname) 
+{
     int y = 3;
     vector<string> n {{"Jan"}, {"Ab"}, {"Piet"}};
     // ...
@@ -43,8 +43,7 @@ void h(char (*)(int)) {} // #2
 
 
 /////////
-class CHello
-{
+class CHello {
 public:
     int func()
     {
@@ -176,6 +175,30 @@ int main()
 
     CHello hello;
     cout << hello.func() << endl;
+
+
+    //////////////////
+    // all strings were declared with the UTF-8 prefix u8
+
+    // file encoding determines the encoding of å and Ö
+    std::string auto_enc = "Vår gård på Öland!";
+    // this text is well-formed in both ISO-8859-1 and UTF-8
+    std::string ascii = "Var gard pa Oland!";
+    // explicitly use the ISO-8859-1 byte-values for å and Ö
+    // this is invalid UTF-8
+    std::string iso8859_1 = "V\xE5r g\xE5rd p\xE5 \xD6land!";
+    // explicitly use the UTF-8 byte sequences for å and Ö
+    // this will display incorrectly in ISO-8859-1
+    std::string utf8 = "V\xC3\xA5r g\xC3\xA5rd p\xC3\xA5 \xC3\x96land!";
+
+    std::cout << "byte-count of automatically-chosen, [" << auto_enc
+                << "] = " << auto_enc.length() << '\n';
+    std::cout << "byte-count of ASCII-only [" << ascii << "] = " << ascii.length()
+                << '\n';
+    std::cout << "byte-count of explicit ISO-8859-1 bytes [" << iso8859_1
+                << "] = " << iso8859_1.length() << '\n';
+    std::cout << "byte-count of explicit UTF-8 bytes [" << utf8
+                << "] = " << utf8.length() << '\n';
 
     
     return 0;
